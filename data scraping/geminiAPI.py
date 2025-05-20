@@ -1,7 +1,7 @@
 import streamlit as st
 def geminiApi(prompt):
 
-    geminiAPI="AIzaSyBq9LmoCRSh9mEeGJcwIepPNshSi7k8bq0"
+    geminiAPI="apikey"
 
     from google import genai
 
