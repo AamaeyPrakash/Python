@@ -1,0 +1,27 @@
+import cv2
+img1 = cv2.imread("./assets/airplaneobject1.png")
+blurred1 = cv2.GaussianBlur(img1,(5,5),1.4)
+edge1 = cv2.Canny(img1, 50, 150)
+blurred_edge1 = cv2.Canny(blurred1,50,150)
+cv2.imshow("Gaussian Blur", blurred1)
+cv2.imshow("Canny Edges", edge1)
+cv2.imshow("Gaussian Blur + Canny", blurred_edge1)
+
+img2 = cv2.imread("./assets/airplaneobject2.jpg")
+blurred2 = cv2.GaussianBlur(img2,(5,5),1.4)
+edge2 = cv2.Canny(img2, 50, 150)
+blurred_edge2 = cv2.Canny(blurred2,50,150)
+cv2.imshow("Gaussian Blur", blurred2)
+cv2.imshow("Canny Edges", edge2)
+cv2.imshow("Gaussian Blur + Canny", blurred_edge2)
+
+img3 = cv2.imread("./assets/airplaneobject3.png")
+blurred3 = cv2.GaussianBlur(img3,(5,5),1.4)
+edge3 = cv2.Canny(img3, 50, 150)
+blurred_edge3 = cv2.Canny(blurred3,50,150)
+cv2.imshow("Gaussian Blur", blurred3)
+cv2.imshow("Canny Edges", edge3)
+cv2.imshow("Gaussian Blur + Canny", blurred_edge3)
+
+cv2.waitKey(0)
+cv2.destroyAllWindows()
