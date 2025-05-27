@@ -1,6 +1,5 @@
 ## Grayscale Video + Face Detection
 # import cv2
-
 # cap = cv2.VideoCapture(0)
 
 # while True:
@@ -19,12 +18,10 @@
 #     cv2.imshow("Grayscale Face Detection",gray)
     
 # cv2.waitKey(0)
-
 # cv2.destroyAllWindows()
 
 ## Video Capture Gaussian + Canny
 # import cv2
-
 # cap = cv2.VideoCapture(0)
 
 # while True:
@@ -41,9 +38,7 @@
 #     cv2.imshow("Canny + Gaussian Blur", edge)
 #     cv2.imshow("Canny Edges", edge2)
 
-    
 # cv2.waitKey(0)
-
 # cv2.destroyAllWindows()
 
 ## Airplane Object Detection
@@ -76,25 +71,50 @@
 # cv2.destroyAllWindows()
 
 ## Live Face and Eye Detection
+# import cv2
+# cap = cv2.VideoCapture(0)
+# faceHC = cv2.CascadeClassifier("haarcascade_frontalcatface.xml")
+# eyeHC = cv2.CascadeClassifier("haarcascade_eye.xml")
 
+# while True:
+#     ret,frame = cap.read() 
+#     if ret:
+#         gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
+#         faces = faceHC.detectMultiScale(gray)
+#         for x,y,w,h in faces:
+#             cv2.rectangle(gray,(x,y),(x+w,y+h),(0,255,0),2)
+#             cv2.rectangle(frame,(x,y),(x+w,y+h),(0,255,0),2)
+
+#             eyes = eyeHC.detectMultiScale(gray)
+#             for (ex, ey, ew, eh) in eyes:
+#                 cv2.rectangle(gray, (ex, ey), (ex+ew, ey+eh), (255, 0, 0), 2)
+#                 cv2.rectangle(frame, (ex, ey), (ex+ew, ey+eh), (255, 0, 0), 2)
+
+#     if cv2.waitKey(2) & 0xFF == ord('q'):
+#         break
+#     cv2.imshow("Face and Eye Detection",frame)
+    
+# cv2.waitKey(0)
+# cv2.destroyAllWindows()
+
+## Number Plate Detection
 import cv2
+import pytesseract
 
-cap = cv2.VideoCapture(0)
+img = cv2.imread("./assets/numplate1.png") 
+text = pytesseract.image_to_string(img)
 
-while True:
+gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+blur = cv2.GaussianBlur(gray,(5,5),1.4)
+edge = cv2.Canny(blur,50,150)
 
-    ret,frame = cap.read() 
-    
-    if ret:
-        gray = cv2.cvtColor(frame,cv2.COLOR_BGR2GRAY)
-        faceHC = cv2.CascadeClassifier("haarcascade_frontalcatface.xml")
-        faces = faceHC.detectMultiScale(gray)
-        for x,y,w,h in faces:
-            cv2.rectangle(gray,(x,y),(x+w,y+h),(0,255,0),2)
+text2 = pytesseract.image_to_string(edge)
 
-    if cv2.waitKey(2) & 0xFF == ord('q'):
-        break
-    cv2.imshow("Grayscale Face Detection",gray)
-    
+cv2.imshow("Original Image", img)
+cv2.imshow("Blur + Edge", edge)
+
+print("Detected Text:", text)
+print("Detected Text 2:", text2)
+
 cv2.waitKey(0)
 cv2.destroyAllWindows()
