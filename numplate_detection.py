@@ -1,7 +1,7 @@
 import cv2
 import pytesseract
 
-img = cv2.imread("./assets/numplate2.jpg")
+img = cv2.imread("./assets/numplate3.jpeg")
 
 plateHC = cv2.CascadeClassifier("haarcascade_russian_plate_number.xml")
 
@@ -16,8 +16,8 @@ for x,y,w,h in num_plates:
     detected_plate2 = edge[y : y+h, x : x+w]
     text_plate1 = pytesseract.image_to_string(detected_plate1)
     text_plate2 = pytesseract.image_to_string(detected_plate2)
-    print("Detected Text:", text_plate1)
-    print("Detected Text:", text_plate2)
+    print("Detected Text Gray:" , text_plate1)
+    print("Detected Text Edges:", text_plate2)
 
 cv2.imshow("Original Image", img)
 cv2.imshow("Gray Plate", detected_plate1)
